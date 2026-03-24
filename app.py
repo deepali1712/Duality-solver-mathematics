@@ -111,5 +111,6 @@ if st.button("Solve"):
                 y = (b[i] - A[i][0]*x) / A[i][1]
                 plt.plot(x, y, label=f"Constraint {i+1}")
 
+        
         plt.legend()
         st.pyplot(plt)
