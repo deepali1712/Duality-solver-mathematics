@@ -197,7 +197,7 @@ if solve:
 
         with open("result.pdf","rb") as f:
             st.download_button("📄 Download PDF", f, file_name="solution.pdf", mime="application/pdf")
-
+        #update
         # ---------------- GRAPH ----------------
         if n==2:
             st.subheader("📊 Graph")
