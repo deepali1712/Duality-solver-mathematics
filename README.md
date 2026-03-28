@@ -1,4 +1,4 @@
-# Duality-solver-mathematics
+
 # Duality Solver Mathematics
 
 This project is designed to solve mathematical duality problems in a simple and structured way.
