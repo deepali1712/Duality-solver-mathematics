@@ -222,18 +222,23 @@ if solve:
         #update
         # ---------------- GRAPH ----------------
         if n==2:
-            st.subheader("📊 Graph")
+    st.subheader("📊 Graph")
 
-            x = np.linspace(0,10,400)
-            plt.figure()
+    x = np.linspace(0,10,400)
+    plt.figure()
 
-            for i in range(len(A)):
-                if A[i][1]!=0:
-                    y = (b[i] - A[i][0]*x)/A[i][1]
-                    plt.plot(x,y)
+    plt.xlim(0,10)
+    plt.ylim(0,10)
 
-            plt.grid()
-            st.pyplot(plt)
+    for i in range(len(A)):
+        if A[i][1] != 0:
+            y = (b[i] - A[i][0]*x)/A[i][1]
+            plt.plot(x, y, label=f"C{i+1}")
+
+    plt.legend()
+    plt.grid()
+
+    st.pyplot(plt)
 
     else:
         st.error("❌ No feasible solution")
