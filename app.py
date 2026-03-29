@@ -219,6 +219,20 @@ if solve:
 
         with open("result.pdf","rb") as f:
             st.download_button("📄 Download PDF", f, file_name="solution.pdf", mime="application/pdf")
+        
+          import json
+
+          solution_data = {
+          "optimal_value": round(val,4),
+         "variables": list(np.round(result.x,4))
+         }
+
+            st.download_button(
+        "📦 Download JSON",
+        data=json.dumps(solution_data, indent=2),
+        file_name="solution.json",
+        mime="application/json"
+        )
         #update
         # ---------------- GRAPH ----------------
         if n==2:
