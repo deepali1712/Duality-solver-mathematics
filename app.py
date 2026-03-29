@@ -78,18 +78,29 @@ else:
 
 # ---------------- SOLVER FUNCTION ----------------
 def solve_lp(problem_type, c, A, b, ineq):
+    """
+    Solves a Linear Programming problem using the HiGHS method.
+    Normalizes constraints and objective functions for the linprog solver.
+    """
+    # Initialize lists for upper-bound constraints (A_ub * x <= b_ub)
     A_ub, b_ub = [], []
 
+    # Loop through each constraint to ensure they follow the "Less than or Equal to" (<=) format
     for i in range(len(ineq)):
         if ineq[i] == "≤":
+            # If already <=, add the coefficients and constants directly
             A_ub.append(A[i])
             b_ub.append(b[i])
         elif ineq[i] == "≥":
+            # If >=, multiply both sides by -1 to flip the inequality sign to <=
             A_ub.append([-x for x in A[i]])
             b_ub.append(-b[i])
 
+    # linprog is a minimizer by default. 
+    # If the goal is Maximization, we negate the objective function coefficients (c).
     c_mod = [-x for x in c] if problem_type == "Maximization" else c
 
+    # Call the solver using the modified objective and normalized constraints
     return linprog(c_mod, A_ub=A_ub, b_ub=b_ub, method="highs")
 
 # ---------------- SOLVE ----------------
