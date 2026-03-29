@@ -52,7 +52,7 @@ with st.sidebar:
     n = st.number_input("Variables", min_value=2, value=2)
     m = st.number_input("Constraints", min_value=1, value=2)
 
-# ---------------- EXAMPLE ----------------
+# ---------------- EXAMPLE  FOR REFERENCE ----------------
 if st.button("📌 Load Example"):
     c = [3, 2]
     A = [[2, 1], [1, 3]]
