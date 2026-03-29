@@ -93,20 +93,28 @@ def solve_lp(problem_type, c, A, b, ineq):
     return linprog(c_mod, A_ub=A_ub, b_ub=b_ub, method="highs")
 
 # ---------------- SOLVE ----------------
+# Trigger the solving process when the user clicks the button
 if st.button("🚀 Solve Problem"):
 
+    # Validation: Ensure each row in the constraint matrix A matches the number of variables n
     if any(len(row) != n for row in A):
         st.error("Invalid constraint matrix")
         st.stop()
 
+    # Call the solver function with the provided problem parameters
     result = solve_lp(problem_type, c, A, b, ineq)
 
+    # Check if the solver successfully found a feasible optimal solution
     if result.success:
+        # If the problem is Maximization, flip the sign of the result 
+        # (Standard solvers like SciPy minimize by default)
         val = -result.fun if problem_type == "Maximization" else result.fun
 
+        # Display the results in the Streamlit UI
         st.subheader("✅ Solution")
         st.metric("Optimal Value", round(val, 4))
 
+        # Iterate through and display the value for each decision variable (x1, x2, etc.)
         for i, v in enumerate(result.x):
             st.write(f"x{i+1} = {round(v,4)}")
 
